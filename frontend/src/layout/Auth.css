@@ -1,0 +1,100 @@
+/* =================================== */
+/* Auth Layout & Forms
+/* =================================== */
+
+.auth-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--color-surface);
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 420px;
+  padding: var(--spacing-xl);
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.auth-logo a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+}
+
+.auth-card {
+  background-color: var(--color-background);
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--color-border);
+}
+
+.form-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 12px var(--spacing-md);
+  font-size: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border-radius: var(--border-radius-md);
+  margin-top: var(--spacing-sm);
+  transition: background-color 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: var(--color-primary-dark);
+  color: var(--color-background); /* Explicitly set color on hover */
+}
+
+.auth-switch-link {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
+.auth-switch-link p {
+  color: var(--color-text-secondary);
+}
+
+.auth-switch-link a {
+  font-weight: 500;
+  color: var(--color-primary);
+}
