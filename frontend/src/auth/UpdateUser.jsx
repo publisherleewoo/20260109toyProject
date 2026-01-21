@@ -1,53 +1,25 @@
-import axios from "axios";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Signup = () => {
-   const navi = useNavigate()
-   const [v, setformData] = useState({
-      postcode: "",
-      address: "",
-   });
-
+const UpdateUser = () => {
    const currentYear = new Date().getFullYear();
    const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
    const months = Array.from({ length: 12 }, (_, i) => i + 1);
    const days = Array.from({ length: 31 }, (_, i) => i + 1);
+// 비밀번호: 수정 페이지에서 비밀번호를 보여줄 필요는 없습니다. (보통 보안상 ********로 처리하거나 빈칸으로 둡니다.) 사용자가 비밀번호를 바꿀 때만 새 비밀번호를 입력받아 서버로 전송하면 됩니다.
 
-   const handleSubmit = (event) => {
-      event.preventDefault();
-      const formData = new FormData(event.target);
-      axios.post("http://localhost:9999/sign.up",formData).then((res) => {
-         if(res.data.msg==="signUp DB 등록 성공"){
-            alert("회원가입성공")
-            navi("/")
-         }
-      })
-         .catch((err) => alert(err));
-   };
+// 아이디(이메일): 아이디는 수정 불가능한 경우가 많으므로 disabled 처리된 input 창으로 보여주는 것이 좋습니다.
 
-   const onChangeFun = (e) => {
-      setformData({
-         ...v,
-         [e.target.name]: e.target.value,
-      });
-   };
-   const postOnClick = () => {
-      new window.daum.Postcode({
-         oncomplete: function (data) {
-            setformData((prev) => ({
-               ...prev,
-               postcode: data.zonecode,
-               address: data.address,
-            }));
-         },
-      }).open();
-   };
+// 나머지 정보: 이름, 주소, 프로필 이미지 경로 등은 서버에서 받아와서 화면에 채워줘야(Pre-fill) 사용자가 수정을 편하게 할 수 있습니다.
 
-   return (
-      <div className="auth-card">
+
+// 여기에서는 axios.put 해보기
+
+  return (
+    <div className="auth-card">
          <h1 className="form-title">회원가입</h1>
-         <form onSubmit={handleSubmit}>
+         <form 
+        //  onSubmit={handleSubmit}
+         >
             <div className="form-group">
                <label className="form-label" htmlFor="name">
                   이름
@@ -58,7 +30,7 @@ const Signup = () => {
                   type="text"
                   placeholder="이름을 입력하세요"
                   name="name"
-                  onChange={onChangeFun}
+                //   onChange={onChangeFun}
                />
             </div>
 
@@ -69,7 +41,7 @@ const Signup = () => {
                      className="form-control"
                      id="birth-year"
                      name="birthYear"
-                     onChange={onChangeFun}
+                    //  onChange={onChangeFun}
                   >
                      <option value="">년</option>
                      {years.map((year) => (
@@ -82,7 +54,7 @@ const Signup = () => {
                      className="form-control"
                      id="birth-month"
                      name="birthMonth"
-                     onChange={onChangeFun}
+                    //  onChange={onChangeFun}
                   >
                      <option value="">월</option>
                      {months.map((month) => (
@@ -95,7 +67,7 @@ const Signup = () => {
                      className="form-control"
                      id="birth-day"
                      name="birthDay"
-                     onChange={onChangeFun}
+                    //  onChange={onChangeFun}
                   >
                      <option value="">일</option>
                      {days.map((day) => (
@@ -117,7 +89,7 @@ const Signup = () => {
                   type="email"
                   placeholder="예: name@example.com"
                   name="email"
-                  onChange={onChangeFun}
+                //   onChange={onChangeFun}
                />
             </div>
 
@@ -131,7 +103,7 @@ const Signup = () => {
                   type="password"
                   placeholder="••••••••"
                   name="password"
-                  onChange={onChangeFun}
+                //   onChange={onChangeFun}
                />
             </div>
 
@@ -145,7 +117,7 @@ const Signup = () => {
                   type="password"
                   placeholder="••••••••"
                   name="confirmPassword"
-                  onChange={onChangeFun}
+                //   onChange={onChangeFun}
                />
             </div>
 
@@ -159,9 +131,9 @@ const Signup = () => {
                   type="text"
                   placeholder="예: 01234"
                   name="postcode"
-                  onChange={onChangeFun}
-                  onClick={postOnClick}
-                  value={v.postcode}
+                //   onChange={onChangeFun}
+                //   onClick={postOnClick}
+                //   value={v.postcode}
                />
             </div>
 
@@ -175,8 +147,8 @@ const Signup = () => {
                   type="text"
                   placeholder="도로명 주소"
                   name="address"
-                  onChange={onChangeFun}
-                  value={v.address}
+                //   onChange={onChangeFun}
+                //   value={v.address}
                />
             </div>
 
@@ -190,7 +162,7 @@ const Signup = () => {
                   type="text"
                   placeholder="아파트, 동/호수 등"
                   name="detailAddress"
-                  onChange={onChangeFun}
+                //   onChange={onChangeFun}
                />
             </div>
 
@@ -204,7 +176,7 @@ const Signup = () => {
                   type="file"
                   placeholder="프로필이미지"
                   name="profileimage"
-                  onChange={onChangeFun}
+                //   onChange={onChangeFun}
                />
             </div>
 
@@ -218,7 +190,7 @@ const Signup = () => {
             </p>
          </div>
       </div>
-   );
-};
+  )
+}
 
-export default Signup;
+export default UpdateUser
