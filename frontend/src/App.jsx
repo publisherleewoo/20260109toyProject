@@ -31,6 +31,9 @@ function App() {
                if(res.data.msg !=="토큰이 아직 유효합니다"){
                   // 토큰이 아직 유효하지 않으므로 리덕스 데이터 삭제
                   dispatcher(setUser({}))
+                  if(location.pathname !== "/login" && location.pathname !== "/signup"  ){
+                     alert("유효기간이 지났습니다 다시 로그인해주세요")
+                  }
                }
             })
             .catch((err) => alert(err));

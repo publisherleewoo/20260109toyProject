@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 const FirstLayout = () => {
    const loginUser = useSelector((store) => store.ms.user);
+   useEffect(()=>{
 
+   },[loginUser])
    const utilNav = () => {
       if (loginUser.name) {
          return (

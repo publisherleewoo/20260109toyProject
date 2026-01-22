@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
+import { setUser } from "../slice/memberSlice";
 
 const VerifyPassword = () => {
    const navi = useNavigate();
+   const dispatch = useDispatch()
    const location = useLocation();
    const userInfo = useSelector(store=>store.ms.user)
    const mode = location.state?.mode || "confirm"; // "edit" 또는 "delete"
@@ -18,11 +20,16 @@ const VerifyPassword = () => {
          alert("비밀번호를 입력해주세요.");
          return;
       }
+      
+      if(Object.keys(userInfo).length===0 && userInfo.constructor === Object ){
+         alert("다시 로그인해주세요")
+         return false
+      }
 
       const fd =  new FormData()
       fd.append("email",userInfo.email)
       fd.append("password",password)
-
+      
       axios.post("http://localhost:9999/verifypassword", fd)
          .then((res) => {
             if (res.data.msg==="인증에 성공했습니다") {
@@ -31,6 +38,7 @@ const VerifyPassword = () => {
                      // 삭제 로직 실행
                      axios.delete(`http://localhost:9999/delete.user/${userInfo.email}`).then(() => {
                         alert("탈퇴가 완료되었습니다.");
+                        dispatch(setUser({}))
                         navi("/");
                      });
                   }
